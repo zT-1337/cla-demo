@@ -34,3 +34,5 @@
 - Im Hauptmenü der CLA Assistant ist es möglich noch optionale Einstellungen für den Link zwischen Repository und CLA zu machen
 - Zum einen kann eingestellt werden, dass die CLA erst ab einer bestimmten Anzahl von geänderten Zeilen / Datein notwendig wird
 - Zusätzlich kann noch ein Link hinterlegt werden für eine Datenschutzerklärung für die persönlichen Daten, die durch die CLA erfragt werden
+
+## This looks great!
