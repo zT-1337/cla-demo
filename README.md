@@ -34,3 +34,58 @@
 - Im Hauptmenü der CLA Assistant ist es möglich noch optionale Einstellungen für den Link zwischen Repository und CLA zu machen
 - Zum einen kann eingestellt werden, dass die CLA erst ab einer bestimmten Anzahl von geänderten Zeilen / Datein notwendig wird
 - Zusätzlich kann noch ein Link hinterlegt werden für eine Datenschutzerklärung für die persönlichen Daten, die durch die CLA erfragt werden
+
+## API Aufrufe 
+
+Für die Authentifizierung muss ein Cookie mit dem Namen connect.sid gesetzt sein.
+Dieser kann sich aus dem Browser geholt werden, wenn man sich bei [CLA Assistant](https://cla-assistant.io/) mithilfe seines GitHub Accounts einloggt.
+
+### CLA Erstellung für ein Repo
+
+POST https://cla-assistant.io/api/repo/create
+
+```json
+{
+  "gist":"<URL des Gists, dass verwendet werden soll",
+  "sharedGist":<true | false, je nachdem ob das gist geteilt werden soll>,
+  "repoId":<Repo Id>,
+  "repo":"<Repo Name>",
+  "owner":"<Owner des Repos>"
+}
+```
+
+Beispiel curl befehl:
+
+```sh
+curl -vvv -X POST 'https://cla-assistant.io/api/repo/create' \
+     -H "Content-Type: application/json" \
+     --cookie "connect.sid=xxxxxx" \
+     -d '{"gist":"https://gist.github.com/zT-1337/742c78531acead00441c8e580e622126","sharedGist":true,"repoId":859285940,"repo":"cla-demo","owner":"zT-1337"}'
+```
+
+### CLA Whitelisting von bestimmten Benutzern und Organisationen
+
+POST https://cla-assistant.io/api/repo/update
+
+```json
+{
+  "gist":"https://gist.github.com/zT-1337/742c78531acead00441c8e580e622126",
+  "sharedGist":true,
+  "allowListPattern":"zT-1337,pfeuffer",
+  "allowListPatternOrgs":"cloudogu,scm-manager",
+  "repoId":"859285940",
+  "repo":"cla-demo",
+  "owner":"zT-1337"
+}
+```
+
+Beispiel curl befehl:
+
+```sh
+curl -vvv -X POST 'https://cla-assistant.io/api/repo/update' \
+     -H "Content-Type: application/json" \
+     --cookie "connect.sid=xxxxxx" \
+     -d '{"gist":"https://gist.github.com/zT-1337/742c78531acead00441c8e580e622126","sharedGist":true,"allowListPattern":"zT-1337,pfeuffer","allowListPatternOrgs":"cloudogu,scm-manager","repoId":"859285940","repo":"cla-demo","owner":"zT-1337"}'
+```
+
+
